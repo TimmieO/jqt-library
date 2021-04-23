@@ -27,12 +27,15 @@ function messageBox(data){
     throw new TypeError('data.color should be of type object')
   }
   if(data.text != undefined && typeof(data.text) != 'object'){
-    throw new TypeError('data.message should be of type object')
+    throw new TypeError('data.text should be of type object')
+  }
+  if(data.animation != undefined && typeof(data.animation) != 'object'){
+    throw new TypeError('data.animation should be of type object')
   }
 
   /*TODO-DONE
    - Add way to add controllers to box
-  - Easier understanding of text, maybe put status as text
+   - Easier understanding of text, maybe put status as text
    */
 
   /*TODO-Add
@@ -142,6 +145,7 @@ function messageBox(data){
     this.elementHolder.closeSpan.classList.add("message-box-close-span");
 
     this.elementHolder.outerContainer.style.backgroundColor = data.color.cardBackground ? data.color.cardBackground : data.color.cardBg;
+
     this.elementHolder.statusSpan.style.color = data.color.statusText;
     this.elementHolder.statusSpan.textContent = data.text.status;
     this.elementHolder.messageSpan.style.color = data.color.messageText;
@@ -149,6 +153,14 @@ function messageBox(data){
 
     this.elementHolder.messageSpan.style.color = data.controller.close.color;
     this.elementHolder.closeSpan.textContent = data.controller.close.icon;
+
+    //adding extra effects
+    //TODO-Fix animation!
+    if(data.animation != undefined){
+      setAnimations(data.animation.type, data.animation.duration, this.elementHolder.outerContainer);
+    }
+
+    //appending
 
     this.elementHolder.statusContainer.append(this.elementHolder.statusSpan);
     this.elementHolder.messageContainer.append(this.elementHolder.messageSpan);
@@ -170,7 +182,7 @@ function messageBox(data){
 
   if(data.duration > 0){
     setTimeout(function(){
-      document.querySelector("#" + extraInfo.elementId).remove()
+      //document.querySelector("#" + extraInfo.elementId).remove()
     }, data.duration * 1000)
   }
 
