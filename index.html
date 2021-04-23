@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="js/jqt-script/css/jqt-style.css">
+  <link rel="stylesheet" href="js/jqt-script/css/jqt-card.css">
+  <link rel="stylesheet" href="js/jqt-script/css/jqt-message.css">
+</head>
+<body>
+
+<div class="card-container" data-card="container" style="width:100%;"></div>
+<fieldset class="field-container">
+  <legend>Card Input Box</legend>
+    <div class="card-input-inner">
+      <div class="card-input-size">
+        <input type="number" class="input-height" data-card-input="height" placeholder="Height"/>
+        <input type="number" class="input-width" data-card-input="width" placeholder="Width"/><br/>
+      </div>
+      <div class="card-input-text">
+        <input type="text" class="input-header" data-card-input="headerText" placeholder="Header Text"/>
+        <input type="text" class="input-body" data-card-input="bodyText" placeholder="Body Text"/><br/>
+      </div>
+      <div class="card-input-color">
+        <input type="text" class="input-header-color" data-card-input="headerColor" placeholder="Header Color"/>
+        <input type="text" class="input-body-color" data-card-input="bodyColor" placeholder="Body Color"/>
+        <input type="text" class="input-color" data-card-input="color" placeholder="Main Color"/>
+      </div>
+      <button class="create-card">Create Box</button>
+    </div>
+</fieldset>
+<fieldset class="field-container">
+  <legend>Message Box</legend>
+  <button class="message-box">Create Box</button>
+</fieldset>
+<fieldset class="field-container">
+  <legend>Checklist Box</legend>
+
+</fieldset>
+<div class="checklist-main">
+  <div class="checklist-controller">
+    <input type="text" data-jqt-input="checklist" />
+    <span class="checklist-add" data-jqt="checklist-add">Add</span>
+  </div>
+  <div class="checklist-container" data-jqt="checklist-container">
+
+  </div>
+</div>
+
+</body>
+<script src="https://kit.fontawesome.com/cfa9cf0e0f.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/jqt-script/jquery/jqt-card.js"></script>
+<script src="js/jqt-script/jquery/jqt-msgBox.js"></script>
+<script src="js/jqt-script/jquery/jqt-checkList.js"></script>
+<script src="js/jqt-script/vanilla/message.js"></script>
+<script>
+  $(".create-card").jqtCardSelectFunc(1, 2);
+
+  document.getElementsByClassName("message-box")[0].onclick = function(){
+    messageBox(
+      {
+        status: 0,
+        text:{
+          status: "Hahaha",
+          message: "Heasdasdsadsadyyyy"
+        },
+        color: {
+          cardBg: "Blue",
+          statusText: "orange",
+          messageText: "White"
+        },
+        duration: 5
+      }
+    );
+  }
+  checkList();
+</script>
+</html>

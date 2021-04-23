@@ -1,0 +1,31 @@
+@import 'animations.css';
+
+.message-box-holder{
+  position: fixed;
+  right:0;
+  max-height: 50%;
+  bottom: 2vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.message-box-outer-container{
+  display: flex;
+  position: relative;
+  height: 5vh;
+  max-width: 100%;
+  border-radius: 2%;
+  width: auto;
+}
+.message-box-outer-container div{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: medium;
+}
+.message-box-status-span{
+  font-weight: bold;
+}
+.message-box-message-span{
+  margin-left: 0.5vw;
+  margin-right: 1vw;
+}

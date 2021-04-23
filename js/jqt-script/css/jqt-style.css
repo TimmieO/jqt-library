@@ -1,0 +1,149 @@
+.card-container{
+  display: flex;
+  justify-content: space-around;
+}
+/*Cards*/
+/*Card-1*/
+.c-1{
+}
+/*Card-2*/
+.c-2{
+  text-align: center;
+}
+.c-h-t-2{
+
+}
+/*Card-3*/
+.c-3{
+
+}
+/*Header*/
+.c-h-d-3{
+
+}
+.c-h-t-3{
+
+}
+/*Body*/
+.c-b-d-3{
+
+}
+.c-b-t-3{
+
+}
+/*Card-4*/
+.c-4{
+
+}
+/*Header*/
+.c-h-d-4{
+
+}
+.c-h-t-4{
+
+}
+/*Body*/
+.c-b-d-4{
+
+}
+.c-b-t-4{
+
+}
+
+.field-container{
+  width: 20vw;
+  height: 20vh;
+}
+
+.card-input-size{
+  margin-bottom: 10px;
+}
+.card-input-text{
+  margin-bottom: 10px;
+}
+.card-input-color{
+  margin-bottom: 10px;
+}
+
+.message-card-main{
+  position: absolute;
+  height: 5vh;
+  line-height: 5vh;
+  width: auto;
+  border-radius: 2%;
+
+  bottom: 2vh;
+  right: 0;
+}
+.message-card-main span,
+.message-card-main svg{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: medium;
+}
+.message-card-type{
+  font-weight: bold;
+}
+.message-card-message{
+  margin-left: 0.5vw;
+  margin-right: 1vw;
+}
+
+.checklist-main{
+  width: 30vw;
+}
+.checklist-controller{
+  border: 1px solid black;
+}
+
+.checklist-container{
+  display: block;
+  position: relative;
+  height: 30vh;
+  border: 1px solid black;
+  overflow: auto;
+}
+.checklist-item-div{
+  height: 3vh;
+  width: 100%;
+  border-width: 1px;
+  border-style: none none solid none;
+}
+
+.checklist-item-text-div{
+  position: absolute;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 3vh;
+  border-width: 1px;
+  border-style: none solid none solid;
+}
+
+.checklist-item-left-controller{
+  position: absolute;
+  width: 10%;
+  float: left;
+  border-width: 10px;
+}
+.checklist-item-right-controller{
+  position: absolute;
+  width: 10%;
+  right: 0;
+}
+
+.checklist-item-edit-span svg,
+.checklist-item-remove-span svg{
+   position: absolute;
+   right: 0;
+ }
+.checklist-item-checkbox{
+  position: absolute;
+  border: 1px solid orange;
+  margin: 0;
+  height: 2.25vh;
+  width: 2.25vw;
+  top: 0.25vh;
+  left: 0;
+}

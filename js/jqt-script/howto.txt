@@ -1,0 +1,53 @@
+$("YourElement").jqtCardSelectFunc(Function you want to use, Parameter for selection of card);
+
+@ = Extended/jQuery function
+@> = Extended/jQuery function call
+
+# = Function
+#> = Function call
+
++ Things to add
+#! = Invalid
+? = Questionable
+! = Not working
+>< = Descriptive example
+"" = Example from code
+"-" = Example multiple lines
+
+v = Variable
+>- = RowNum
+
+!Multiple line explanation starting with - and no row marking means last row mentioned is still valid row OR under same function!
+
+* = See row for information
+
+{ jqtCardSelectFunc function
+    @> >-49 jqtCardSelectFunc:function(cardFuncNum, cardVar) = Main function with switch statement to call correct function
+         v- cardFuncNum = Variable used in switch statement to get correct function
+         v- cardVar = Variable used in function call to >for instance get correct cardType<
+
+    "" >-52 "$(".hey").createCard(cardVar)"
+         v- cardVar =
+         - "$(this)" = button.
+         - ".createCard()" = function call with value of cardVar parameter being set in html file.
+}
+{ createCard function
+    @> >-56 createCard:function(typeOfCard) = createCard function call to create card
+         v-56 typeOfCard = Variable
+
+    "" >-57 "this[0].onclick = function()"
+         - "this[0]" = Chosen element as button
+         - "onclick = function()" = Javascript eventlistener to check for on click
+
+    @> "-" >-58 "$(this).createCardFunc()"
+         - "$(this)" = chosen button
+         - ".createCardFunc()" = function call filled with needed parameters * -------Add  params later >-59
+}
+{createCardFunc function
+    @> -
+}
+
++Add for font-size selection
++Fix css
++Add more functions to cards
++Add way to do ajax query easy from function
