@@ -39,8 +39,9 @@ function messageBox(data){
    */
 
   /*TODO-Add
-  - Fix better animations
+  - Fix smoother animations
   - Fix better remove animation when max boxes
+  - Fix smoother adding cards (Maybe not with flexbox)
   - Add icons using fontawesome
   - Add controller setting for user to choose whether they want to user the X controller, or set own in message
   - Add animation
@@ -165,7 +166,6 @@ function messageBox(data){
     }
 
     //appending
-
     this.elementHolder.statusContainer.append(this.elementHolder.statusSpan);
     this.elementHolder.messageContainer.append(this.elementHolder.messageSpan);
     this.elementHolder.controllerContainer.append(this.elementHolder.closeSpan);
