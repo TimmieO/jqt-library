@@ -1,20 +1,24 @@
 @import 'animations.css';
 
 .message-box-holder{
+  display: flex;
   position: fixed;
-  right:0;
+  flex-direction: column-reverse;
   max-height: 50%;
   bottom: 2vh;
   overflow-x: hidden;
   overflow-y: auto;
+  right: 10px;
 }
 .message-box-outer-container{
   display: flex;
   position: relative;
-  height: 5vh;
+  max-height: 5vh;
+  flex-grow: 1;
   max-width: 100%;
-  border-radius: 2%;
+  border-radius: 5%;
   width: auto;
+  margin-top: 5px;
 }
 .message-box-outer-container div{
   display: flex;

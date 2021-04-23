@@ -7,6 +7,11 @@ function setAnimations(animation, duration, element){
       break;
     }
     case 1:
+    case "fade-out": {
+      fadeOut(1, element)
+      break;
+    }
+    case 2:
     case "float-up":{
       floatUp(duration, element)
     }
@@ -26,8 +31,30 @@ function fadeIn(duration, element){
     }
   }, duration * 100)
 }
-function floatUp(duration, element){
-  element.style.height = 5 + "vh"
-  element.style.transition = "height " + duration + "s ease-in";
+function fadeOut(duration, element){
+  let opacity = 1;
+  let fadeInterval = setInterval(function(){
+    if(opacity > 0) {
+      opacity = opacity - 0.1;
+      element.style.opacity = opacity;
+    }
+    if(opacity <= 1){
+      clearInterval(fadeInterval);
+    }
+  }, duration * 100)
+}
 
+//TODO-Fix float up
+function floatUp(duration, element, elementHeight) {
+  let height = 0;
+  element.style.height = 0;
+  let fadeInterval = setInterval(function () {
+    if (height < 5) {
+      height = height + 1;
+      element.style.height = height + "vh";
+    }
+    if (height >= 100) {
+      clearInterval(fadeInterval);
+    }
+  }, duration * 100)
 }

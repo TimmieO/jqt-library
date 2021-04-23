@@ -39,10 +39,13 @@ function messageBox(data){
    */
 
   /*TODO-Add
+  - Fix better animations
+  - Fix better remove animation when max boxes
   - Add icons using fontawesome
   - Add controller setting for user to choose whether they want to user the X controller, or set own in message
   - Add animation
   - Add "card" controller, to controll width, height, position, etc
+  - Clear up in code, unwanted code gone
   - Start working on documentation
    */
 
@@ -139,6 +142,7 @@ function messageBox(data){
     this.elementHolder.controllerContainer.classList.add("message-box-controller-container");
 
     this.elementHolder.outerContainer.id = extraInfo.elementId;
+    this.elementHolder.containerHolder.style.height = 5 * 10 + "vh";
 
     this.elementHolder.statusSpan.classList.add("message-box-status-span");
     this.elementHolder.messageSpan.classList.add("message-box-message-span");
@@ -176,13 +180,18 @@ function messageBox(data){
     document.body.append(this.elementHolder.containerHolder);
   }
 
+  if(document.querySelectorAll(".message-box-outer-container").length > 5){
+    setAnimations("fade-out", 0.5, document.querySelectorAll(".message-box-outer-container")[0]);
+    document.querySelectorAll(".message-box-outer-container")[0].remove();
+  }
+
   document.querySelectorAll(".message-box-holder")[0].append(this.elementHolder.outerContainer);
 
   //remove element after time set (if time is set)
 
   if(data.duration > 0){
     setTimeout(function(){
-      //document.querySelector("#" + extraInfo.elementId).remove()
+      document.querySelector("#" + extraInfo.elementId).remove()
     }, data.duration * 1000)
   }
 
