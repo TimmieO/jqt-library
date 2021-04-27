@@ -53,17 +53,19 @@
 </body>
 <script src="https://kit.fontawesome.com/cfa9cf0e0f.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/feather-icons"></script>
+ <!-- JQUERY -->
 <script src="js/jqt-script/jquery/jquery-3.4.1.min.js"></script>
 <script src="js/jqt-script/jquery/jqt-card.js"></script>
 <script src="js/jqt-script/jquery/jqt-msgBox.js"></script>
 <script src="js/jqt-script/jquery/jqt-checkList.js"></script>
+
+ <!-- VANILLA -->
 <script src="js/jqt-script/vanilla/animations.js"></script>
 <script src="js/jqt-script/vanilla/message.js"></script>
 <script>
   $(".create-card").jqtCardSelectFunc(1, 2);
-
   document.getElementsByClassName("message-box")[0].onclick = function(){
-    messageBox(
+    messageCard(
       {
         status: 0,
         text:{
@@ -71,15 +73,14 @@
           message: "Heasdasdsadsadyyyy"
         },
         color: {
-          cardBg: "Blue",
+          cardBg: "Grey",
           statusText: "orange",
           messageText: "White"
         },
         animation: {
-          type: 1,
+          type: "float-up",
           duration: 0.5
         },
-        duration: 5
       }
     );
   }

@@ -9,6 +9,11 @@
   -statusColor: color of status text,
   -messageColor: color of message text,
 }
+- card{
+  -max
+  -height
+  -width
+}
 - Animation:{
   -type(ease-in, fly up, etc)
   -duration
@@ -16,7 +21,9 @@
 - Time
  */
 
-function messageBox(data){
+function messageCard(data){
+
+  //Send error if wrong input
   if(typeof(data) != 'object'){
     throw new TypeError('Params should be of type object')
   }
@@ -36,24 +43,33 @@ function messageBox(data){
   /*TODO-DONE
    - Add way to add controllers to box
    - Easier understanding of text, maybe put status as text
+   - Fix smoother animations
+   - Add animation
+   - Add param to add max cards allowed
+
    */
 
   /*TODO-Add
-  - Fix smoother animations
-  - Fix better remove animation when max boxes
+  - Finish adding animations
+  - Fix fade out and remove after time or on button click
+  - Fix other cards drop down when bottom one is removed
+  - Fix bugs with animations (If any exist)
+
   - Fix smoother adding cards (Maybe not with flexbox)
   - Add icons using fontawesome
   - Add controller setting for user to choose whether they want to user the X controller, or set own in message
-  - Add animation
-  - Add "card" controller, to controll width, height, position, etc
+  - Add "card" controller, to controll width, height, position, etc (HALF)
   - Clear up in code, unwanted code gone
   - Start working on documentation
+  - Add check for unneeded data being entered (Data that is not used)
+  - Add to allow user to change font-size, color and background color of the different things via data.status, data.message, data.controller, also keep general with data.text etc
+  - Add classes to variables
    */
 
   //all elements
   this.elementHolder = {
-    containerHolder: document.createElement("div"),
-    outerContainer: document.createElement("div"),
+    cardHolder: document.createElement("div"),
+    cardContainer: document.createElement("div"),
     statusContainer: document.createElement("div"),
     messageContainer: document.createElement("div"),
     controllerContainer: document.createElement("div"),
@@ -83,9 +99,16 @@ function messageBox(data){
         color: "black"
       }
     },
-    bgColor: "black",
-    textColor: "grey",
-    duration: 0
+    card: {
+      max: 5,
+      height: 5 + "vh",
+      width: 100 + "%"
+    },
+    color: {
+      bgColor: "black",
+      textColor: "grey"
+    },
+    duration: 0,
   }
 
   //extra info
@@ -94,12 +117,9 @@ function messageBox(data){
   }
 
   //Creating color and text object if not set by user
-  if(data.color == undefined){
-    data.color = {};
-  }
-  if(data.text == undefined){
-    data.text = {}
-  }
+  if(data.color == undefined){data.color = {}}
+  if(data.text == undefined){data.text = {}}
+  if(data.card == undefined){data.card = {}}
 
   //Handle data that is sent
   //Setting default values etc
@@ -121,35 +141,35 @@ function messageBox(data){
 
     //Do color check and set as default color if not set by user
     if(typeof(data.color) == 'object'){
-      if(data.color.cardColor == undefined){
-        data.color.cardColor = defaultInfo.bgColor;
-      }
-      if(data.color.statusColor == undefined){
-        data.color.statusColor = defaultInfo.textColor;
-      }
-      if(data.color.messageColor == undefined){
-        data.color.messageColor = defaultInfo.textColor;
-      }
+      if(data.color.cardColor == undefined){data.color.cardColor = defaultInfo.color.bgColor}
+      if(data.color.statusColor == undefined){data.color.statusColor = defaultInfo.color.textColor}
+      if(data.color.messageColor == undefined){data.color.messageColor = defaultInfo.color.textColor}
     }
+
+    if(typeof(data.card) == 'object'){
+      if(data.card.max == undefined){data.card.max = defaultInfo.card.max}
+      if(data.card.height == undefined){data.card.height = defaultInfo.card.height}
+      if(data.card.width == undefined){data.card.width = defaultInfo.card.width}
+    }
+
+    //Adding controller
     data.controller = defaultInfo.controller
   }
 
   //Create message box
-  this.createBox = function(data){
-    this.elementHolder.containerHolder.classList.add("message-box-holder")
-    this.elementHolder.outerContainer.classList.add("message-box-outer-container");
+  this.createCard = function(data){
+
+    this.elementHolder.cardHolder.classList.add("message-box-holder");
+    this.elementHolder.cardContainer.classList.add("message-box-outer-container");
     this.elementHolder.statusContainer.classList.add("message-box-status-container");
     this.elementHolder.messageContainer.classList.add("message-box-message-container");
     this.elementHolder.controllerContainer.classList.add("message-box-controller-container");
 
-    this.elementHolder.outerContainer.id = extraInfo.elementId;
-    this.elementHolder.containerHolder.style.height = 5 * 10 + "vh";
+    this.elementHolder.cardContainer.id = extraInfo.elementId;
 
     this.elementHolder.statusSpan.classList.add("message-box-status-span");
     this.elementHolder.messageSpan.classList.add("message-box-message-span");
     this.elementHolder.closeSpan.classList.add("message-box-close-span");
-
-    this.elementHolder.outerContainer.style.backgroundColor = data.color.cardBackground ? data.color.cardBackground : data.color.cardBg;
 
     this.elementHolder.statusSpan.style.color = data.color.statusText;
     this.elementHolder.statusSpan.textContent = data.text.status;
@@ -159,36 +179,50 @@ function messageBox(data){
     this.elementHolder.messageSpan.style.color = data.controller.close.color;
     this.elementHolder.closeSpan.textContent = data.controller.close.icon;
 
-    //adding extra effects
-    //TODO-Fix animation!
-    if(data.animation != undefined){
-      setAnimations(data.animation.type, data.animation.duration, this.elementHolder.outerContainer);
-    }
-
     //appending
     this.elementHolder.statusContainer.append(this.elementHolder.statusSpan);
     this.elementHolder.messageContainer.append(this.elementHolder.messageSpan);
     this.elementHolder.controllerContainer.append(this.elementHolder.closeSpan);
 
-    this.elementHolder.outerContainer.append(this.elementHolder.statusContainer, this.elementHolder.messageContainer, this.elementHolder.controllerContainer);
+    this.elementHolder.cardContainer.append(this.elementHolder.statusContainer, this.elementHolder.messageContainer, this.elementHolder.controllerContainer);
   }
+
+  //Add styles on one place, less confusion
+  this.addStyle = function(data){
+    //Holder box
+    this.elementHolder.cardHolder.style.height = 5 * 10 + "vh";
+
+    //Card container
+    this.elementHolder.cardContainer.style.backgroundColor = data.color.cardBackground ? data.color.cardBackground : data.color.cardBg;
+    this.elementHolder.cardContainer.style.maxWidth = "100%"; //Set max width to fill card
+    this.elementHolder.cardContainer.style.width = data.card.width; //Width
+    this.elementHolder.cardContainer.style.maxHeight = data.card.height; //Height
+  }
+
+  //Made addAnimation function for future
+  this.addAnimation = function(animation, duration){
+    setAnimations(animation, duration, this.elementHolder.cardContainer)
+  }
+
   //Calling functions
   this.dataHandler();
-  this.createBox(data)
+  this.addStyle(data);
+  this.createCard(data);
 
-  if(document.querySelectorAll(".message-box-holder").length == 0){
-    document.body.append(this.elementHolder.containerHolder);
+  if(data.animation != undefined)this.addAnimation(data.animation.type, data.animation.duration);
+
+  //Append card holder
+  if(document.querySelectorAll(".message-box-holder").length == 0){document.body.append(this.elementHolder.cardHolder)}
+
+  //Make sure it appends from bottom
+  if(document.querySelectorAll(".message-box-outer-container").length > 0){
+    document.querySelectorAll(".message-box-holder")[0].insertBefore(this.elementHolder.cardContainer, document.querySelectorAll(".message-box-outer-container")[0]);
+  }
+  else{
+    document.querySelectorAll(".message-box-holder")[0].append(this.elementHolder.cardContainer);
   }
 
-  if(document.querySelectorAll(".message-box-outer-container").length > 5){
-    setAnimations("fade-out", 0.5, document.querySelectorAll(".message-box-outer-container")[0]);
-    document.querySelectorAll(".message-box-outer-container")[0].remove();
-  }
-
-  document.querySelectorAll(".message-box-holder")[0].append(this.elementHolder.outerContainer);
-
-  //remove element after time set (if time is set)
-
+  //Remove after time
   if(data.duration > 0){
     setTimeout(function(){
       document.querySelector("#" + extraInfo.elementId).remove()

@@ -13,11 +13,8 @@
 .message-box-outer-container{
   display: flex;
   position: relative;
-  max-height: 5vh;
   flex-grow: 1;
-  max-width: 100%;
   border-radius: 5%;
-  width: auto;
   margin-top: 5px;
 }
 .message-box-outer-container div{
