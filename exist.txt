@@ -1,0 +1,29 @@
+### EXISTING ###
+
+ABILITY TO EASY CREATE A CARD USING FOLLOWING
+messageCard({
+    status,
+    text:{
+        status: First text,
+        message: Message on card
+    },
+    color:{
+        cardBackground OR cardBg: Background color of card,
+        statusColor: color of status text,
+        messageColor: color of message text,
+    },
+    card:{
+        max: (Max amount of cards),
+        height: (Height of card, default 5vh),
+        width: (Width of card, default set to auto)
+    },
+    animation:{
+        type: (Type of animation existing animations = fade-in, fade-out, slide-up, slide-down, slide-left, slide-right, fly-in, fly-out, rotate-360, rotatex-360, rotatey-360)
+        duration: (Duration time of animation (Time until finished))
+    },
+    duration: (How long the card is supposed to stay on screen)
+})
+
+##To be added##
+
+Ability to change controller with check and x.
